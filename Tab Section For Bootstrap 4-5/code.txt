@@ -1,0 +1,49 @@
+<section id="gallery" class="gallery-section " style="padding-top:<?= get_field('padding_top')?>px; padding-bottom:<?= get_field('padding_bottom') ?>px;">
+    <div class="container">
+        <div class="section-title">
+            <h2><?= get_field('heading') ?><span></span></h2>
+        </div>
+        <div class="nav-tabs-navigation">
+            <ul class="nav nav-tabs" role="tablist">
+                <?php $i = 1; foreach (get_field('tabs_group')['tabs'] as $value) { ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($i == 1) {echo "active"; } ?>" id="spa-tab<?= $i; ?>" data-bs-toggle="tab" href="#tab<?= $i; ?>" role="tab" aria-controls="tab<?= $i; ?>" aria-selected="true" style="font-size:20px;"><?= $value['title'] ?></a>
+                    </li>
+                <?php $i++;
+                } ?>
+            </ul>
+        </div>
+
+
+
+        <div class="tab-content">
+        <?php $i=1; foreach(get_field('tabs_group')['tab_content'] as $val){?>
+            <div class="tab-pane <?php if($i==1){echo "show active"; } ?>" id="tab<?= $i; ?>" role="tabpanel" aria-labelledby="spa-tab<?= $i; ?>">
+
+            
+                <div class="row">
+                <?php foreach ($val['contentbox_repeater'] as  $val1) { ?>
+                    <div class="col-md-6">
+                        <div class="card mb-30">
+                            <div class="image">
+                                <img src="<?= $val1['image']['url'] ?>" alt=" Image">
+                                <div class="hover-content">
+                                    <a href="<?= $val1['link'] ?>" style="font-size:20px;"><?= $val1['image_hover_text'] ?></a>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <h3 class="title"><a href="<?= $val1['link'] ?>"><?= $val1['heading'] ?></a></h3>
+                                <p class="text" style="font-size:12px;"><?= $val1['description'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+     
+                </div>
+            </div>
+            <?php $i++; }?>
+
+        </div>
+    </div>
+</section>
